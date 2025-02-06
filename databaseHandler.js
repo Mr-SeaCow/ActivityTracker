@@ -48,8 +48,11 @@ class DatabaseHandler {
     async getMessages() {
         let sqlQuery = 'SELECT * FROM `Messages` ORDER BY `Timestamp` ASC;';
         let res = await this._query(sqlQuery);
-        console.log(res)    
-        return this.db.messages
+        let tempAra = []
+        for (let i = 0; i < res.length; i++) {
+            tempAra.push([res[i].Timestamp, res[i].UserID, res[i].MessageCount]);
+        }
+        return tempAra;
     }
     /*
     INSERT INTO tbl_name
@@ -85,7 +88,10 @@ class DatabaseHandler {
     async getVoiceStatus() {
         let sqlQuery = 'SELECT * FROM `Voice` ORDER BY `Timestamp` ASC;';
         let res = await this._query(sqlQuery);
-        console.log(res)
+        let tempAra = []
+        for (let i = 0; i < res.length; i++) {
+            tempAra.push([res[i].Timestamp, res[i].UserID, res[i].Status]);
+        }
         return res
     }
 
