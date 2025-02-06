@@ -93,6 +93,7 @@ client.on(Events.MessageCreate, async message => {
       Users[messages[i][1]] = [...messages[i], []];
     }
   }
+  console.log(voice)
   for (let i = 0; i < voice.length; i++) {
     if (Date.parse(voice[i][0]) < Date.now() - cutOffTime)
       continue;
