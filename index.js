@@ -50,25 +50,14 @@ client.on(Events.MessageCreate, async message => {
 
   const user = message.guild.members.cache.get(message.author.id);
 
-  if (!user.roles.cache.has(ROLEFLAG))
+  if (!user.roles.cache.has(ROLEFLAG) || message.author.id === '176532282935345153')
     return;
 
   if (DEBUG)
     console.log(`User ${message.author.id} sent a message in channel ${message.channelId} at ${message.createdTimestamp}`)
 
-  DBHandler.insertMessage(getTimestamp(), message.author.id, 1);
-
-  if (message.content === 'messages') {
-    const messages = await DBHandler.getMessages();
-    if (DEBUG)
-      console.log(messages);
-  }
-
-  if (message.content === 'voice') {
-    const voice = await DBHandler.getVoiceStatus();
-    if (DEBUG)
-      console.log(voice);
-  }
+  if (message.author.id !== '176532282935345153')
+    DBHandler.insertMessage(getTimestamp(), message.author.id, 1);
 
   if (message.content.startsWith('!activity')) {
 
