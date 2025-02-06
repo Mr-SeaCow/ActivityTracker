@@ -43,6 +43,9 @@ function convertToTime(timestamp) {
   timeString += minutes > 0 ? `${minutes}m ` : '';
   timeString += seconds > 0 ? `${seconds}s` : '';
 
+  if (timeString === '')
+    timeString = '0s'
+
   return timeString;
 }
 
@@ -118,7 +121,7 @@ client.on(Events.MessageCreate, async message => {
 
   for (const key in Users) {
     const tUser = message.guild.members.cache.get(Users[key][1]);
-    ara.push([tUser.user.username, Users[key][2], convertToTime(Users[key][3], 'Activity'), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
+    ara.push([tUser.user.username, Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
   }
 
   ara = ara.sort(function (a, b) {
