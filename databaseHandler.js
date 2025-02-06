@@ -1,16 +1,4 @@
 
-
-let db = {
-    messages: [],
-    voiceStatus: []
-};
-
-
-let tempStore = {
-    messages: [],
-    voiceStatus: []
-}
-
 class DatabaseHandler {
 
     constructor(options) {
@@ -34,17 +22,25 @@ class DatabaseHandler {
     }
 
     async insertMessage(timestamp, userID, messageCount) {
-        console.log(timestamp)
         await this.tempStore.messages.push([timestamp, userID, messageCount]);
     }
 
     async getMessages() {
         return this.db.messages
     }
+    /*
+    INSERT INTO tbl_name
+    (a,b,c)
+    VALUES
+    (1,2,3),
+    (4,5,6),
+    (7,8,9);
+    */
 
+    // INSERT INTO `Messages` (`ID`, `Timestamp`, `UserID`, `MessageCount`) VALUES (NULL, '2025-02-11 22:56:35', '176532282935345153', '10');
     async insertMessagesDB(messages) {
         if (this.debug)
-        console.log(messages)
+            console.log(messages)
         this.db.messages.push(...messages);
     }
     
@@ -101,47 +97,26 @@ class DatabaseHandler {
 
 
 
-setInterval(() => {
-    let m = tempStore.messages;
-    let v = tempStore.voiceStatus;
-    let tempM = {};
-    tempStore.messages = [];
-    tempStore.voiceStatus = [];
-    for (let i = 0; i < m.length; i++) {
-        if (tempM[m[i][1]]) {
-            tempM[m[i][1]][2] += m[i][2];
-            tempM[m[i][1]][0] = m[i][0];
-        } else {
-            tempM[m[i][1]] = m[i];
-        }
-    }
-    for (const key in tempM) {
-        db.messages.push(tempM[key]);
-    }
+// setInterval(() => {
+//     let m = tempStore.messages;
+//     let v = tempStore.voiceStatus;
+//     let tempM = {};
+//     tempStore.messages = [];
+//     tempStore.voiceStatus = [];
+//     for (let i = 0; i < m.length; i++) {
+//         if (tempM[m[i][1]]) {
+//             tempM[m[i][1]][2] += m[i][2];
+//             tempM[m[i][1]][0] = m[i][0];
+//         } else {
+//             tempM[m[i][1]] = m[i];
+//         }
+//     }
+//     for (const key in tempM) {
+//         db.messages.push(tempM[key]);
+//     }
 
-    db.voiceStatus.push(...v);
-}, 10000)
-
-/// MESSAGES
-// TIMESTAMP USERID MESSAGE COUNT
-async function insertMessage(timestamp, userID, messageCount) {
-    await tempStore.messages.push([timestamp, userID, messageCount]);
-}
-
-async function getMessages() {
-    console.log(db.messages)
-    return db.messages
-}
-
-/// VOICE STATUS
-// TIMESTAMP USERID STATUS (JOIN/LEAVE)
-async function insertVoiceStatus(timestamp, userID, status) {
-    await tempStore.voiceStatus.push([timestamp, userID, status]);
-}
-
-async function getVoiceStatus() {
-    return db.voiceStatus
-}
+//     db.voiceStatus.push(...v);
+// }, 10000)
 
 
 module.exports = {DatabaseHandler};
