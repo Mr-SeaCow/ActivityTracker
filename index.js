@@ -7,6 +7,7 @@ client.on(Events.ClientReady, readyClient => {
   console.log(`Logged in as ${readyClient.user.tag}!`);
 });
 
+console.log("test")
 const { DatabaseHandler } = require('./databaseHandler.js');
 const DBHandler = new DatabaseHandler({
   intervalTimer: 1000,
