@@ -10,7 +10,7 @@ client.on(Events.ClientReady, readyClient => {
 
 const { DatabaseHandler } = require('./databaseHandler.js');
 const DBHandler = new DatabaseHandler({
-  intervalTimer: 1000,
+  intervalTimer: 60000,
   dbSettings: {
     host: dbhost,
     user: dbuser,
@@ -93,7 +93,6 @@ client.on(Events.MessageCreate, async message => {
       Users[messages[i][1]] = [...messages[i], []];
     }
   }
-  console.log(voice)
   for (let i = 0; i < voice.length; i++) {
     if (Date.parse(voice[i][0]) < Date.now() - cutOffTime)
       continue;
