@@ -29,6 +29,7 @@ function getTimestamp() {
 const cutOffTime = 604800000;
 const DEBUG = false;
 const ROLEFLAG = '1328465625743495269';
+const ADMINFLAG = '1328458384852254811';
 
 function convertToTime(timestamp) {
   let days = Math.floor(timestamp / (1000 * 60 * 60 * 24));
@@ -50,14 +51,14 @@ client.on(Events.MessageCreate, async message => {
 
   const user = message.guild.members.cache.get(message.author.id);
 
-  if (!user.roles.cache.has(ROLEFLAG) && message.author.id != '176532282935345153')
+  if (!user.roles.cache.has(ROLEFLAG) && message.author.id != '176532282935345153' && !user.roles.cache.has(ADMINFLAG))
     return;
 
   if (DEBUG)
     console.log(`User ${message.author.id} sent a message in channel ${message.channelId} at ${message.createdTimestamp}`)
   
-  if (message.author.id != '176532282935345153')
-    DBHandler.insertMessage(getTimestamp(), message.author.id, 1);
+  if (message.author.id != '176532282935345153' && !user.roles.cache.has(ADMINFLAG))
+      DBHandler.insertMessage(getTimestamp(), message.author.id, 1);
 
   if (message.content.startsWith('!activity')) {
 
