@@ -120,7 +120,7 @@ client.on(Events.MessageCreate, async message => {
       }
     }
     if (lastJoinTime !== 0)
-      totalTime += Date.now() - lastJoinTime;
+      totalTime += lastJoinTime - Date.now();
 
     Users[key][3] = `${(totalTime)}`;
   }
