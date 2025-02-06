@@ -122,7 +122,7 @@ client.on(Events.MessageCreate, async message => {
     let ara = [['Username', 'Messages', 'Voice Time', 'Activity']];
 
     for (const key in Users) {
-      const tUser = message.guild.members.cache.get(Users[key][1]);
+      let tUser = message.guild.members.cache.get(Users[key][1]);
       if (tUser == undefined) {
         tUser = client.guilds.cache.get('1328455635431588044')
         tUser = tUser.members.cache.get(Users[key][1])
