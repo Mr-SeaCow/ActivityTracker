@@ -94,7 +94,7 @@ client.on(Events.MessageCreate, async message => {
       if (Users[voice[i][1]]) {
         Users[voice[i][1]][3].push([voice[i][0], voice[i][1], voice[i][2]]);
       } else {
-        Users[voice[i][1]] = [0, voice[1][1], 0, [[voice[i][0], voice[i][1], voice[i][2]]]];
+        Users[voice[i][1]] = [0, voice[i][1], 0, [[voice[i][0], voice[i][1], voice[i][2]]]];
       }
     }
 
