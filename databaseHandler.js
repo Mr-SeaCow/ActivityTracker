@@ -92,7 +92,7 @@ class DatabaseHandler {
         for (let i = 0; i < res.length; i++) {
             tempAra.push([res[i].Timestamp, res[i].UserID, res[i].Status]);
         }
-        return res
+        return tempAra
     }
 
     // INSERT INTO `Voice` (`ID`, `Timestamp`, `UserID`, `Status`) VALUES (NULL, '2025-02-11 22:55:35', '373669826859761664', 'JOIN');
