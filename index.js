@@ -28,7 +28,7 @@ function getTimestamp() {
 
 const cutOffTime = 604800000;
 const DEBUG = false;
-const ROLEFLAG = '1336926530181402665';
+const ROLEFLAG = '1328465625743495269';
 
 function convertToTime(timestamp) {
   let days = Math.floor(timestamp / (1000 * 60 * 60 * 24));
