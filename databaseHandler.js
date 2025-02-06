@@ -104,7 +104,7 @@ class DatabaseHandler {
 
     async _query(sql) {
         try {
-            result = this.pool.query(sql);
+            let result = this.pool.query(sql);
             return result;
         } catch (err) {
             this.pool.query("ROLLBACK");
