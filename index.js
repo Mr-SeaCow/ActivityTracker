@@ -1,7 +1,7 @@
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits, IntentsBitField  } = require('discord.js');
 
 const { TOKEN, dbhost, database, dbuser, dbpass  } = require('./config.json');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers] });
+const client = new Client({ intents: [IntentsBitField.Flags.DirectMessages, GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers] });
 //const collector = message.createMessageComponentCollector({});
 client.on(Events.ClientReady, readyClient => {
   console.log(`Logged in as ${readyClient.user.tag}!`);
@@ -48,6 +48,8 @@ function convertToTime(timestamp) {
 
   return timeString;
 }
+
+client.on(Events.)
 
 client.on(Events.MessageCreate, async message => {
   console.log(message)
