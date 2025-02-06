@@ -91,6 +91,8 @@ class DatabaseHandler {
 
     // INSERT INTO `Voice` (`ID`, `Timestamp`, `UserID`, `Status`) VALUES (NULL, '2025-02-11 22:55:35', '373669826859761664', 'JOIN');
     async insertVoiceStatusDB(voiceStatus) {
+        if (voiceStatus.length == 0)
+            return;
         this.db.voiceStatus.push(...voiceStatus);
         let sqlQuery = 'INSERT INTO `Voice` (`ID`, `Timestamp`, `UserID`, `Status`) VALUES ';
         for (let i = 0; i < voiceStatus.length; i++) {
