@@ -1,21 +1,22 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 
-const { TOKEN } = require('./config.json');
+const { TOKEN, dbhost, database, dbuser, dbpass  } = require('./config.json');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers] });
 //const collector = message.createMessageComponentCollector({});
 client.on(Events.ClientReady, readyClient => {
   console.log(`Logged in as ${readyClient.user.tag}!`);
 });
 
-console.log("test")
+
 const { DatabaseHandler } = require('./databaseHandler.js');
 const DBHandler = new DatabaseHandler({
   intervalTimer: 1000,
   dbSettings: {
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'discordbot'
+    host: dbhost,
+    user: dbuser,
+    password: dbpass,
+    database: database,
+    connectionLimit: 100
   },
   DEBUG: false
 });
@@ -55,7 +56,7 @@ client.on(Events.MessageCreate, async message => {
   if (DEBUG)
     console.log(`User ${message.author.id} sent a message in channel ${message.channelId} at ${message.createdTimestamp}`)
 
-  DBHandler.insertMessage(message.createdTimestamp, message.author.id, 1);
+  DBHandler.insertMessage(getTimestamp(), message.author.id, 1);
 
   if (message.content === 'messages') {
     const messages = await DBHandler.getMessages();
