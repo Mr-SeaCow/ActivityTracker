@@ -100,7 +100,6 @@ class DatabaseHandler {
         }
         sqlQuery = sqlQuery.substring(0, sqlQuery.length - 1);
         let res = await this._query(sqlQuery);
-        console.log(res)
         return res
     }
 
