@@ -50,6 +50,7 @@ function convertToTime(timestamp) {
 }
 
 client.on(Events.MessageCreate, async message => {
+  console.log(message)
   if (message.author.bot) return;
 
   const user = message.guild.members.cache.get(message.author.id);
