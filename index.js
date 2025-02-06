@@ -50,8 +50,7 @@ client.on(Events.MessageCreate, async message => {
 
   const user = message.guild.members.cache.get(message.author.id);
 
-  console.log(message.author.id)
-  if (!user.roles.cache.has(ROLEFLAG) || message.author.id == '176532282935345153')
+  if (!user.roles.cache.has(ROLEFLAG) && message.author.id != '176532282935345153')
     return;
 
   if (DEBUG)
