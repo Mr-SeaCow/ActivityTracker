@@ -50,7 +50,7 @@ function convertToTime(timestamp) {
 }
 
 client.on(Events.MessageCreate, async message => {
-  console.log(message)
+
   if (message.author.bot) return;
 
   const user = message.guild.members.cache.get(message.author.id);
@@ -87,6 +87,7 @@ client.on(Events.MessageCreate, async message => {
         Users[messages[i][1]] = [...messages[i], []];
       }
     }
+    consolelog(voice)
     for (let i = 0; i < voice.length; i++) {
       if (Date.parse(voice[i][0]) < Date.now() - cutOffTime)
         continue;
