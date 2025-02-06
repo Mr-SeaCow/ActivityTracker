@@ -49,8 +49,6 @@ function convertToTime(timestamp) {
   return timeString;
 }
 
-client.on(Events.)
-
 client.on(Events.MessageCreate, async message => {
   console.log(message)
   if (message.author.bot) return;
