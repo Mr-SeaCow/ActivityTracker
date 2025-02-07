@@ -132,7 +132,7 @@ client.on(Events.MessageCreate, async message => {
     }
 
     ara = ara.sort(function (a, b) {
-      return b[3]- a[3];
+      return a[3]- b[3];
     });
 
     ara = ara.slice(0, filterNum + 1);
