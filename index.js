@@ -128,11 +128,11 @@ client.on(Events.MessageCreate, async message => {
         tUser = tUser.members.cache.get(Users[key][1])
       }
 
-      ara.push([tUser.user.username, Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
+      ara.push([tUser.user.username.replace('_', '\\_'), Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
     }
 
     ara = ara.sort(function (a, b) {
-      return b.Activity - a.Activity;
+      return b[3]- a[3];
     });
 
     ara = ara.slice(0, filterNum + 1);
