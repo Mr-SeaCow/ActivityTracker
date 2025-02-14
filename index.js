@@ -127,8 +127,9 @@ client.on(Events.MessageCreate, async message => {
         tUser = client.guilds.cache.get('1328455635431588044')
         tUser = tUser.members.cache.get(Users[key][1])
       }
-      if (tUser.user !== undefined)
-        ara.push([tUser.user.username.replaceAll('_', 'ˍ'), Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
+      if (tUser === undefined)
+        continue;
+      ara.push([tUser.user.username.replaceAll('_', 'ˍ'), Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
     }
 
     ara = ara.sort(function (a, b) {
