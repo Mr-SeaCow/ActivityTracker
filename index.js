@@ -2,7 +2,7 @@ const { Client, Events, GatewayIntentBits, IntentsBitField  } = require('discord
 
 const { TOKEN, dbhost, database, dbuser, dbpass  } = require('./config.json');
 const client = new Client({ intents: [IntentsBitField.Flags.DirectMessages, GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers] });
-//const collector = message.createMessageComponentCollector({});
+
 client.on(Events.ClientReady, readyClient => {
   console.log(`Logged in as ${readyClient.user.tag}!`);
 });
@@ -127,8 +127,8 @@ client.on(Events.MessageCreate, async message => {
         tUser = client.guilds.cache.get('1328455635431588044')
         tUser = tUser.members.cache.get(Users[key][1])
       }
-
-      ara.push([tUser.user.username.replaceAll('_', 'ˍ'), Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
+      if (tUser.user !== undefined)
+        ara.push([tUser.user.username.replaceAll('_', 'ˍ'), Users[key][2], convertToTime(Users[key][3]), ((Users[key][2] + Math.floor((Users[key][3] / (1000 * 60 * 5)))))]);
     }
 
     ara = ara.sort(function (a, b) {
