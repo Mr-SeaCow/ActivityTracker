@@ -8,12 +8,6 @@ class DatabaseHandler {
         this.pool = mysql.createPool(this.dbSettings);
         this.debug = options.DEBUG;
 
-        // remove this later
-        this.db = {
-            messages: [],
-            voiceStatus: []
-        }
-
         this.tempStore = {
             messages: [],
             voiceStatus: []
@@ -54,14 +48,6 @@ class DatabaseHandler {
         }
         return tempAra;
     }
-    /*
-    INSERT INTO tbl_name
-    (a,b,c)
-    VALUES
-    (1,2,3),
-    (4,5,6),
-    (7,8,9);
-    */
 
     // INSERT INTO `Messages` (`ID`, `Timestamp`, `UserID`, `MessageCount`) VALUES (NULL, '2025-02-11 22:56:35', '176532282935345153', '10');
     async insertMessagesDB(messages) {
@@ -69,7 +55,7 @@ class DatabaseHandler {
             return;
         if (this.debug)
             console.log(messages)
-        this.db.messages.push(...messages);
+
         let sqlQuery = 'INSERT INTO `Messages` (`ID`, `Timestamp`, `UserID`, `MessageCount`) VALUES ';
 
         for (let i = 0; i < messages.length; i++) {
@@ -98,7 +84,6 @@ class DatabaseHandler {
     async insertVoiceStatusDB(voiceStatus) {
         if (voiceStatus.length == 0)
             return;
-        this.db.voiceStatus.push(...voiceStatus);
         let sqlQuery = 'INSERT INTO `Voice` (`ID`, `Timestamp`, `UserID`, `Status`) VALUES ';
         for (let i = 0; i < voiceStatus.length; i++) {
             sqlQuery += `(NULL, '${voiceStatus[i][0]}', '${voiceStatus[i][1]}', '${voiceStatus[i][2]}'),`;
@@ -151,31 +136,5 @@ class DatabaseHandler {
         this.insertVoiceStatusDB(v);
     }
 }
-
-
-
-
-
-// setInterval(() => {
-//     let m = tempStore.messages;
-//     let v = tempStore.voiceStatus;
-//     let tempM = {};
-//     tempStore.messages = [];
-//     tempStore.voiceStatus = [];
-//     for (let i = 0; i < m.length; i++) {
-//         if (tempM[m[i][1]]) {
-//             tempM[m[i][1]][2] += m[i][2];
-//             tempM[m[i][1]][0] = m[i][0];
-//         } else {
-//             tempM[m[i][1]] = m[i];
-//         }
-//     }
-//     for (const key in tempM) {
-//         db.messages.push(tempM[key]);
-//     }
-
-//     db.voiceStatus.push(...v);
-// }, 10000)
-
 
 module.exports = {DatabaseHandler};
